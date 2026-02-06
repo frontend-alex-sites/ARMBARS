@@ -243,7 +243,7 @@ h1 {
 
 /* Узкое поле для веса */
 .weight-input {
-    width: 80px; /* Чуть шире для веса */
+    width: 65px; /* Чуть шире для веса */
 }
 
 .reps-input:focus, .weight-input:focus {
@@ -540,3 +540,4 @@ h1 {
 .workout-exercise {
     animation: fadeIn 0.3s ease-out;
 }
+
