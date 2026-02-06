@@ -228,7 +228,7 @@ h1 {
     color: #fff;
 }
 
-/* Подходы - обновлённые стили */
+/* Подходы */
 .sets-container {
     display: flex;
     flex-direction: column;
@@ -238,7 +238,7 @@ h1 {
 .set-row {
     display: flex;
     align-items: center;
-    padding: 12px 10px;
+    padding: 12px 15px;
     background: #282828;
     border: 1px solid #404040;
     border-radius: 10px;
@@ -250,12 +250,19 @@ h1 {
     background: #333;
 }
 
+/* Группа для номера подхода и полей ввода */
+.set-inputs-group {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
 .set-number {
     min-width: 70px;
     color: #b3b3b3;
     font-size: 14px;
     font-weight: 500;
-    margin-right: 10px;
+    margin-right: 15px;
 }
 
 /* Поля для ввода - одинакового размера */
@@ -308,7 +315,7 @@ h1 {
     transform: scale(1.02);
 }
 
-/* Кнопка удаления подхода - по центру линии */
+/* Кнопка удаления подхода - по центру правой границы, наполовину снаружи */
 .remove-set-btn {
     background: rgba(226, 33, 52, 0.1);
     color: #e22134;
@@ -324,9 +331,10 @@ h1 {
     transition: all 0.3s;
     flex-shrink: 0;
     position: absolute;
-    right: 10px;
+    right: -14px; /* Половина ширины выступает за блок */
     top: 50%;
     transform: translateY(-50%);
+    z-index: 1;
 }
 
 .remove-set-btn:hover {
