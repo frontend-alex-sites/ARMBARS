@@ -238,12 +238,12 @@ h1 {
 .set-row {
     display: flex;
     align-items: center;
-    gap: 8px;
     padding: 12px 10px;
     background: #282828;
     border: 1px solid #404040;
     border-radius: 10px;
     transition: all 0.3s;
+    position: relative;
 }
 
 .set-row:hover {
@@ -255,12 +255,12 @@ h1 {
     color: #b3b3b3;
     font-size: 14px;
     font-weight: 500;
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
-/* Поля для ввода уже */
+/* Поля для ввода - одинакового размера */
 .reps-input, .weight-input {
-    width: 80px;
+    width: 70px;
     padding: 10px;
     border: 2px solid #404040;
     border-radius: 8px;
@@ -272,15 +272,9 @@ h1 {
     flex: none;
 }
 
-/* Узкое поле для повторений */
+/* Отступ между полями */
 .reps-input {
-    width: 70px;
-    margin-right: 5px;
-}
-
-/* Узкое поле для веса */
-.weight-input {
-    width: 80px;
+    margin-right: 10px;
 }
 
 .reps-input:focus, .weight-input:focus {
@@ -314,7 +308,7 @@ h1 {
     transform: scale(1.02);
 }
 
-/* Кнопка удаления подхода */
+/* Кнопка удаления подхода - по центру линии */
 .remove-set-btn {
     background: rgba(226, 33, 52, 0.1);
     color: #e22134;
@@ -329,12 +323,15 @@ h1 {
     justify-content: center;
     transition: all 0.3s;
     flex-shrink: 0;
-    margin-left: auto;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .remove-set-btn:hover {
     background: rgba(226, 33, 52, 0.2);
-    transform: scale(1.1);
+    transform: translateY(-50%) scale(1.1);
 }
 
 /* Футер формы */
@@ -577,6 +574,3 @@ h1 {
 .workout-exercise {
     animation: fadeIn 0.3s ease-out;
 }
-
-
-
