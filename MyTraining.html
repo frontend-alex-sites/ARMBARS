@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyTraining | Дневник армрестлера</title>
+    <link rel="stylesheet" href="mytraining.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Главный экран -->
+        <div id="mainScreen" class="screen active">
+            <div class="main-content">
+                <h1>My Training</h1>
+                <p class="subtitle">Дневник армрестлера</p>
+                
+                <button class="big-btn" id="startWorkoutBtn">
+                    Начать тренировку
+                </button>
+                
+                <button class="big-btn secondary" id="viewHistoryBtn">
+                    История тренировок
+                </button>
+            </div>
+        </div>
+
+        <!-- Форма тренировки -->
+        <div id="workoutScreen" class="screen">
+            <div class="workout-header">
+                <button class="back-btn" id="backToMainBtn">←</button>
+                <h2>Новая тренировка</h2>
+            </div>
+
+            <div class="workout-form" id="workoutForm">
+                <!-- Форма будет добавляться здесь -->
+            </div>
+            
+            <div class="form-footer">
+                <button class="action-btn" id="addExerciseBtn">
+                    + Следующее упражнение
+                </button>
+                <button class="save-btn" id="saveWorkoutBtn">
+                    Завершить тренировку
+                </button>
+            </div>
+        </div>
+
+        <!-- История -->
+        <div id="historyScreen" class="screen">
+            <div class="workout-header">
+                <button class="back-btn" id="backFromHistoryBtn">←</button>
+                <h2>История тренировок</h2>
+            </div>
+
+            <div class="history-list" id="historyList">
+                <!-- Список тренировок -->
+            </div>
+        </div>
+        
+        <!-- Просмотр тренировки -->
+        <div id="viewWorkoutScreen" class="screen">
+            <div class="workout-header">
+                <button class="back-btn" id="backFromViewBtn">←</button>
+                <h2>Просмотр тренировки</h2>
+            </div>
+
+            <div class="workout-details" id="workoutDetails">
+                <!-- Детали тренировки -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Шаблон для упражнения -->
+    <template id="exerciseTemplate">
+        <div class="exercise-block">
+            <div class="exercise-header">
+                <input type="text" class="exercise-name" placeholder="Название упражнения (например: Тяга верхнего блока)">
+                <button class="remove-exercise" title="Удалить">×</button>
+            </div>
+            <div class="sets-container">
+                <!-- Подходы будут здесь -->
+            </div>
+        </div>
+    </template>
+
+    <!-- Шаблон для подхода -->
+    <template id="setTemplate">
+        <div class="set-row">
+            <span class="set-number">Подход 1</span>
+            <input type="number" class="reps-input" placeholder="повт." min="1" max="100">
+            <input type="number" class="weight-input" placeholder="кг" min="1" max="200">
+        </div>
+    </template>
+
+    <script src="mytraining.js"></script>
+</body>
+</html>

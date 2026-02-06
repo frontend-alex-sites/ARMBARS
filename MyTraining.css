@@ -1,0 +1,527 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+}
+
+body {
+    background: #121212;
+    color: #fff;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    background: #121212;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Экранная система */
+.screen {
+    display: none;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* Главный экран */
+.main-content {
+    padding: 40px 20px;
+    text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(180deg, #121212 0%, #1a1a1a 100%);
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 12px;
+    color: #fff;
+    font-weight: 700;
+}
+
+.subtitle {
+    color: #b3b3b3;
+    margin-bottom: 50px;
+    font-size: 16px;
+}
+
+/* Кнопки в стиле Spotify */
+.big-btn {
+    background: #1db954;
+    color: white;
+    border: none;
+    padding: 18px;
+    font-size: 18px;
+    border-radius: 30px;
+    margin: 12px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    box-shadow: 0 8px 15px rgba(29, 185, 84, 0.2);
+}
+
+.big-btn:hover {
+    background: #1ed760;
+    transform: scale(1.02);
+    box-shadow: 0 12px 20px rgba(29, 185, 84, 0.3);
+}
+
+.big-btn.secondary {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #535353;
+    box-shadow: none;
+}
+
+.big-btn.secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #b3b3b3;
+    transform: scale(1.02);
+}
+
+/* Шапка форм в стиле Spotify */
+.workout-header {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #181818;
+    border-bottom: 1px solid #282828;
+}
+
+.workout-header h2 {
+    font-size: 20px;
+    color: #fff;
+    font-weight: 700;
+}
+
+.back-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Форма тренировки */
+.workout-form {
+    padding: 20px;
+    flex: 1;
+    background: #121212;
+}
+
+.exercise-block {
+    background: #181818;
+    border: 1px solid #282828;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.exercise-block:hover {
+    background: #1f1f1f;
+}
+
+.exercise-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.exercise-name {
+    flex: 1;
+    padding: 14px;
+    border: 2px solid #404040;
+    border-radius: 8px;
+    font-size: 16px;
+    background: #282828;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+.exercise-name:focus {
+    outline: none;
+    border-color: #1db954;
+    background: #333;
+}
+
+.remove-exercise {
+    background: #e22134;
+    color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    flex-shrink: 0;
+}
+
+.remove-exercise:hover {
+    background: #ff2d42;
+    transform: scale(1.1);
+}
+
+/* Подходы */
+.sets-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.set-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: #282828;
+    border: 1px solid #404040;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+.set-row:hover {
+    background: #333;
+}
+
+.set-number {
+    min-width: 80px;
+    color: #b3b3b3;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.reps-input, .weight-input {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #404040;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 16px;
+    background: #181818;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+.reps-input:focus, .weight-input:focus {
+    outline: none;
+    border-color: #1db954;
+    background: #222;
+}
+
+/* Кнопка добавления подхода */
+.add-set-btn {
+    background: rgba(29, 185, 84, 0.1);
+    color: #1db954;
+    border: 2px dashed #1db954;
+    padding: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: 15px;
+    width: 100%;
+    font-weight: 600;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.add-set-btn:hover {
+    background: rgba(29, 185, 84, 0.2);
+    border-style: solid;
+    transform: scale(1.02);
+}
+
+/* Кнопка удаления подхода */
+.remove-set-btn {
+    background: rgba(226, 33, 52, 0.1);
+    color: #e22134;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    flex-shrink: 0;
+}
+
+.remove-set-btn:hover {
+    background: rgba(226, 33, 52, 0.2);
+    transform: scale(1.1);
+}
+
+/* Футер формы */
+.form-footer {
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: #181818;
+    border-top: 1px solid #282828;
+}
+
+.action-btn {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    border: 2px solid #404040;
+    padding: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.action-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #b3b3b3;
+    transform: scale(1.02);
+}
+
+.save-btn {
+    background: linear-gradient(135deg, #1db954 0%, #1ed760 100%);
+    color: white;
+    border: none;
+    padding: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 10px 20px rgba(29, 185, 84, 0.3);
+}
+
+.save-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 25px rgba(29, 185, 84, 0.4);
+}
+
+/* История */
+.history-list {
+    padding: 20px;
+    flex: 1;
+    background: linear-gradient(180deg, #121212 0%, #1a1a1a 100%);
+}
+
+.history-item {
+    background: #181818;
+    border: 1px solid #282828;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.history-item:hover {
+    background: #1f1f1f;
+    border-color: #404040;
+    transform: translateY(-2px);
+}
+
+.history-item-content {
+    flex: 1;
+}
+
+.history-date {
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #fff;
+    font-size: 18px;
+}
+
+.history-exercises {
+    color: #b3b3b3;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Кнопка удаления тренировки */
+.delete-workout-btn {
+    background: rgba(226, 33, 52, 0.1);
+    color: #e22134;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    flex-shrink: 0;
+}
+
+.delete-workout-btn:hover {
+    background: rgba(226, 33, 52, 0.2);
+    transform: scale(1.1);
+}
+
+.empty-history {
+    text-align: center;
+    padding: 80px 20px;
+    color: #535353;
+    font-size: 16px;
+}
+
+/* Экран просмотра тренировки */
+.workout-details {
+    padding: 20px;
+    flex: 1;
+    background: linear-gradient(180deg, #121212 0%, #1a1a1a 100%);
+}
+
+.workout-details-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #282828;
+}
+
+.workout-date {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.workout-exercise {
+    background: #181818;
+    border: 1px solid #282828;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+}
+
+.workout-exercise:hover {
+    background: #1f1f1f;
+}
+
+.workout-exercise-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #282828;
+}
+
+.workout-sets {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.workout-set {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #282828;
+    border: 1px solid #404040;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+.workout-set:hover {
+    background: #333;
+}
+
+.set-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.set-number {
+    font-size: 14px;
+    color: #b3b3b3;
+    font-weight: 500;
+}
+
+.set-data {
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Полоса прокрутки */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #181818;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #535353;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #404040;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.history-item,
+.exercise-block,
+.workout-exercise {
+    animation: fadeIn 0.3s ease-out;
+}
