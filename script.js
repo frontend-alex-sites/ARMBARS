@@ -38,6 +38,21 @@ function init() {
     .addEventListener("click", saveWorkout);
 }
 
+// Получить все уникальные названия упражнений из истории
+function getExerciseSuggestions() {
+  const allExercises = new Set();
+  
+  workouts.forEach(workout => {
+    workout.exercises.forEach(exercise => {
+      if (exercise.name && exercise.name.trim() !== "") {
+        allExercises.add(exercise.name.trim());
+      }
+    });
+  });
+  
+  return Array.from(allExercises).sort();
+}
+
 // Показать экран
 function showScreen(screenName) {
   Object.values(screens).forEach((screen) => screen.classList.remove("active"));
@@ -60,11 +75,15 @@ function addExercise() {
 
   const exerciseBlock = exerciseClone.querySelector(".exercise-block");
   const setsContainer = exerciseBlock.querySelector(".sets-container");
+  const exerciseNameInput = exerciseBlock.querySelector(".exercise-name");
 
   // Добавляем 2 подхода
   for (let i = 1; i <= 2; i++) {
     addSetToContainer(setsContainer, i);
   }
+
+  // Добавляем автокомплит для названия упражнения
+  setupAutocomplete(exerciseNameInput);
 
   // Добавляем кнопку для добавления подходов
   const addSetBtn = document.createElement("button");
@@ -93,6 +112,63 @@ function addExercise() {
   }
 
   form.appendChild(exerciseBlock);
+}
+
+// Настроить автокомплит для поля ввода
+function setupAutocomplete(input) {
+  const suggestions = getExerciseSuggestions();
+  if (suggestions.length === 0) return;
+
+  // Создаем контейнер для подсказок
+  const suggestionsContainer = document.createElement("div");
+  suggestionsContainer.className = "suggestions-container";
+  input.parentNode.insertBefore(suggestionsContainer, input.nextSibling);
+
+  // Показываем подсказки при фокусе
+  input.addEventListener("focus", function() {
+    showSuggestions(this, suggestionsContainer, suggestions);
+  });
+
+  // Показываем подсказки при вводе
+  input.addEventListener("input", function() {
+    showSuggestions(this, suggestionsContainer, suggestions);
+  });
+
+  // Скрываем подсказки при клике вне поля
+  document.addEventListener("click", function(e) {
+    if (e.target !== input && !suggestionsContainer.contains(e.target)) {
+      suggestionsContainer.style.display = "none";
+    }
+  });
+}
+
+// Показать подсказки
+function showSuggestions(input, container, allSuggestions) {
+  const value = input.value.toLowerCase();
+  const suggestions = allSuggestions.filter(ex => 
+    ex.toLowerCase().includes(value)
+  );
+
+  container.innerHTML = "";
+  
+  if (suggestions.length === 0 || !value) {
+    container.style.display = "none";
+    return;
+  }
+
+  suggestions.forEach(suggestion => {
+    const div = document.createElement("div");
+    div.className = "suggestion-item";
+    div.textContent = suggestion;
+    div.addEventListener("click", function() {
+      input.value = suggestion;
+      container.style.display = "none";
+      input.focus();
+    });
+    container.appendChild(div);
+  });
+
+  container.style.display = "block";
 }
 
 // Добавить подход в контейнер
@@ -213,7 +289,7 @@ function showHistory() {
   showScreen("history");
 }
 
-// Показать детали тренировки (убрал общий тоннаж)
+// Показать детали тренировки
 function showWorkoutDetails(id) {
   const workout = workouts.find((w) => w.id === id);
   if (!workout) return;
