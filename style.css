@@ -191,7 +191,7 @@ h1 {
     transform: scale(1.1);
 }
 
-/* Подходы */
+/* Подходы - обновлённые стили */
 .sets-container {
     display: flex;
     flex-direction: column;
@@ -201,8 +201,8 @@ h1 {
 .set-row {
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 15px;
+    gap: 8px; /* Уменьшил отступ между элементами */
+    padding: 12px 10px; /* Уменьшил отступы */
     background: #282828;
     border: 1px solid #404040;
     border-radius: 10px;
@@ -214,22 +214,36 @@ h1 {
 }
 
 .set-number {
-    min-width: 80px;
+    min-width: 70px; /* Уменьшил ширину */
     color: #b3b3b3;
     font-size: 14px;
     font-weight: 500;
+    margin-right: 5px; /* Добавил небольшой отступ справа */
 }
 
+/* Поля для ввода уже */
 .reps-input, .weight-input {
-    flex: 1;
-    padding: 12px;
+    width: 80px; /* Фиксированная ширина */
+    padding: 10px; /* Уменьшил отступы */
     border: 2px solid #404040;
     border-radius: 8px;
     text-align: center;
-    font-size: 16px;
+    font-size: 15px; /* Немного уменьшил шрифт */
     background: #181818;
     color: #fff;
     transition: all 0.3s;
+    flex: none; /* Запрещаем растягивание */
+}
+
+/* Узкое поле для повторений */
+.reps-input {
+    width: 70px; /* Ещё уже для повторений */
+    margin-right: 5px; /* Отступ между полями */
+}
+
+/* Узкое поле для веса */
+.weight-input {
+    width: 80px; /* Чуть шире для веса */
 }
 
 .reps-input:focus, .weight-input:focus {
@@ -243,18 +257,18 @@ h1 {
     background: rgba(29, 185, 84, 0.1);
     color: #1db954;
     border: 2px dashed #1db954;
-    padding: 14px;
+    padding: 12px; /* Уменьшил отступы */
     border-radius: 10px;
     cursor: pointer;
-    font-size: 15px;
-    margin-top: 15px;
+    font-size: 14px; /* Уменьшил шрифт */
+    margin-top: 12px; /* Уменьшил отступ сверху */
     width: 100%;
     font-weight: 600;
     transition: all 0.3s;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px; /* Уменьшил отступ между иконкой и текстом */
 }
 
 .add-set-btn:hover {
@@ -263,21 +277,22 @@ h1 {
     transform: scale(1.02);
 }
 
-/* Кнопка удаления подхода */
+/* Кнопка удаления подхода - сдвинута левее */
 .remove-set-btn {
     background: rgba(226, 33, 52, 0.1);
     color: #e22134;
     border: none;
-    width: 30px;
-    height: 30px;
+    width: 28px; /* Немного уменьшил */
+    height: 28px;
     border-radius: 50%;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 15px; /* Уменьшил шрифт */
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s;
     flex-shrink: 0;
+    margin-left: auto; /* Сдвигаем к правому краю */
 }
 
 .remove-set-btn:hover {
