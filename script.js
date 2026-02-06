@@ -181,6 +181,22 @@ function addSetToContainer(container, setNumber) {
   setRow.querySelector(".reps-input").placeholder = `повт.`;
   setRow.querySelector(".weight-input").placeholder = `кг`;
 
+  // Создаем обертку для полей ввода
+  const inputsGroup = document.createElement("div");
+  inputsGroup.className = "set-inputs-group";
+  
+  // Перемещаем элементы в обертку
+  const setNumberEl = setRow.querySelector(".set-number");
+  const repsInput = setRow.querySelector(".reps-input");
+  const weightInput = setRow.querySelector(".weight-input");
+  
+  inputsGroup.appendChild(setNumberEl);
+  inputsGroup.appendChild(repsInput);
+  inputsGroup.appendChild(weightInput);
+  
+  // Вставляем обертку в начало строки
+  setRow.prepend(inputsGroup);
+
   // Добавляем кнопку удаления подхода
   const removeSetBtn = document.createElement("button");
   removeSetBtn.className = "remove-set-btn";
@@ -201,7 +217,10 @@ function addSetToContainer(container, setNumber) {
 function updateSetNumbers(container) {
   const sets = container.querySelectorAll(".set-row");
   sets.forEach((set, index) => {
-    set.querySelector(".set-number").textContent = `Подход ${index + 1}`;
+    const setNumberEl = set.querySelector(".set-number");
+    if (setNumberEl) {
+      setNumberEl.textContent = `Подход ${index + 1}`;
+    }
   });
 }
 
