@@ -70,12 +70,12 @@ function addExercise() {
   const addSetBtn = document.createElement("button");
   addSetBtn.className = "add-set-btn";
   addSetBtn.textContent = "+ Добавить подход";
-  addSetBtn.addEventListener("click", function () {
+  addSetBtn.addEventListener("click", function() {
     const currentSets = setsContainer.querySelectorAll(".set-row").length;
     addSetToContainer(setsContainer, currentSets + 1);
     updateSetNumbers(setsContainer);
   });
-
+  
   // Добавляем кнопку под контейнером подходов
   exerciseBlock.appendChild(addSetBtn);
 
@@ -86,7 +86,7 @@ function addExercise() {
       exerciseBlock.remove();
     }
   });
-
+  
   // Убираем крестик у первого упражнения
   if (form.children.length === 0) {
     removeBtn.style.display = "none";
@@ -110,13 +110,13 @@ function addSetToContainer(container, setNumber) {
   removeSetBtn.className = "remove-set-btn";
   removeSetBtn.textContent = "×";
   removeSetBtn.title = "Удалить подход";
-  removeSetBtn.addEventListener("click", function () {
+  removeSetBtn.addEventListener("click", function() {
     if (container.querySelectorAll(".set-row").length > 1) {
       setRow.remove();
       updateSetNumbers(container);
     }
   });
-
+  
   setRow.appendChild(removeSetBtn);
   container.appendChild(setRow);
 }
