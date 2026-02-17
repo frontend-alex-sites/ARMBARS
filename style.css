@@ -355,7 +355,6 @@ h1 {
     justify-content: space-between;
     gap: 15px;
     transition: all 0.3s;
-    cursor: pointer;
 }
 
 .history-item:hover {
@@ -366,6 +365,7 @@ h1 {
 
 .history-item-content {
     flex: 1;
+    cursor: pointer;
 }
 
 .history-date {
@@ -381,7 +381,7 @@ h1 {
     line-height: 1.4;
 }
 
-/* Кнопка редактирования (карандаш) */
+/* КНОПКА РЕДАКТИРОВАНИЯ (карандаш) */
 .edit-workout-btn {
     background: rgba(180, 180, 180, 0.1);
     color: #b3b3b3;
