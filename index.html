@@ -31,7 +31,9 @@
                 <h2>Новая тренировка</h2>
             </div>
 
-            <div class="workout-form" id="workoutForm"></div>
+            <div class="workout-form" id="workoutForm">
+                <!-- Форма будет добавляться здесь -->
+            </div>
             
             <div class="form-footer">
                 <button class="action-btn" id="addExerciseBtn">
@@ -49,7 +51,10 @@
                 <button class="back-btn" id="backFromHistoryBtn">←</button>
                 <h2>История тренировок</h2>
             </div>
-            <div class="history-list" id="historyList"></div>
+
+            <div class="history-list" id="historyList">
+                <!-- Список тренировок -->
+            </div>
         </div>
         
         <!-- Просмотр тренировки -->
@@ -58,7 +63,10 @@
                 <button class="back-btn" id="backFromViewBtn">←</button>
                 <h2>Просмотр тренировки</h2>
             </div>
-            <div class="workout-details" id="workoutDetails"></div>
+
+            <div class="workout-details" id="workoutDetails">
+                <!-- Детали тренировки -->
+            </div>
         </div>
     </div>
 
@@ -66,10 +74,12 @@
     <template id="exerciseTemplate">
         <div class="exercise-block">
             <div class="exercise-header">
-                <input type="text" class="exercise-name" placeholder="Название упражнения">
+                <input type="text" class="exercise-name" placeholder="Название упражнения (например: Тяга верхнего блока)">
                 <button class="remove-exercise" title="Удалить">×</button>
             </div>
-            <div class="sets-container"></div>
+            <div class="sets-container">
+                <!-- Подходы будут здесь -->
+            </div>
         </div>
     </template>
 
