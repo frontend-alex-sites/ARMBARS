@@ -10,7 +10,6 @@ const screens = {
 
 // Инициализация
 function init() {
-  // Главный экран
   document
     .getElementById("startWorkoutBtn")
     .addEventListener("click", startNewWorkout);
@@ -18,7 +17,6 @@ function init() {
     .getElementById("viewHistoryBtn")
     .addEventListener("click", showHistory);
 
-  // Кнопки назад
   document
     .getElementById("backToMainBtn")
     .addEventListener("click", () => showScreen("main"));
@@ -29,7 +27,6 @@ function init() {
     .getElementById("backFromViewBtn")
     .addEventListener("click", () => showScreen("history"));
 
-  // Форма
   document
     .getElementById("addExerciseBtn")
     .addEventListener("click", addExercise);
@@ -61,12 +58,10 @@ function addExercise() {
   const exerciseBlock = exerciseClone.querySelector(".exercise-block");
   const setsContainer = exerciseBlock.querySelector(".sets-container");
 
-  // Добавляем 2 подхода
   for (let i = 1; i <= 2; i++) {
     addSetToContainer(setsContainer, i);
   }
 
-  // Добавляем кнопку для добавления подходов
   const addSetBtn = document.createElement("button");
   addSetBtn.className = "add-set-btn";
   addSetBtn.textContent = "+ Добавить подход";
@@ -76,10 +71,8 @@ function addExercise() {
     updateSetNumbers(setsContainer);
   });
 
-  // Добавляем кнопку под контейнером подходов
   exerciseBlock.appendChild(addSetBtn);
 
-  // Удаление упражнения (только если это не первое упражнение)
   const removeBtn = exerciseBlock.querySelector(".remove-exercise");
   removeBtn.addEventListener("click", function () {
     if (form.children.length > 1) {
@@ -87,7 +80,6 @@ function addExercise() {
     }
   });
 
-  // Убираем крестик у первого упражнения
   if (form.children.length === 0) {
     removeBtn.style.display = "none";
   }
@@ -102,10 +94,7 @@ function addSetToContainer(container, setNumber) {
   const setRow = setClone.querySelector(".set-row");
 
   setRow.querySelector(".set-number").textContent = `Подход ${setNumber}`;
-  setRow.querySelector(".reps-input").placeholder = `повт.`;
-  setRow.querySelector(".weight-input").placeholder = `кг`;
 
-  // Добавляем кнопку удаления подхода
   const removeSetBtn = document.createElement("button");
   removeSetBtn.className = "remove-set-btn";
   removeSetBtn.textContent = "×";
@@ -167,7 +156,6 @@ function saveWorkout() {
     return;
   }
 
-  // Сохраняем
   const workout = {
     id: Date.now(),
     date: new Date().toLocaleDateString("ru-RU"),
@@ -245,7 +233,7 @@ function showWorkoutDetails(id) {
   showScreen("viewWorkout");
 }
 
-// === НОВАЯ ФУНКЦИЯ РЕДАКТИРОВАНИЯ ===
+// Редактировать тренировку
 function editWorkout(id) {
   const workout = workouts.find(w => w.id === id);
   if (!workout) return;
