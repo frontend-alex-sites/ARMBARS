@@ -10,15 +10,32 @@ const screens = {
 
 // Инициализация
 function init() {
-  document.getElementById("startWorkoutBtn").addEventListener("click", startNewWorkout);
-  document.getElementById("viewHistoryBtn").addEventListener("click", showHistory);
+  // Главный экран
+  document
+    .getElementById("startWorkoutBtn")
+    .addEventListener("click", startNewWorkout);
+  document
+    .getElementById("viewHistoryBtn")
+    .addEventListener("click", showHistory);
 
-  document.getElementById("backToMainBtn").addEventListener("click", () => showScreen("main"));
-  document.getElementById("backFromHistoryBtn").addEventListener("click", () => showScreen("main"));
-  document.getElementById("backFromViewBtn").addEventListener("click", () => showScreen("history"));
+  // Кнопки назад
+  document
+    .getElementById("backToMainBtn")
+    .addEventListener("click", () => showScreen("main"));
+  document
+    .getElementById("backFromHistoryBtn")
+    .addEventListener("click", () => showScreen("main"));
+  document
+    .getElementById("backFromViewBtn")
+    .addEventListener("click", () => showScreen("history"));
 
-  document.getElementById("addExerciseBtn").addEventListener("click", addExercise);
-  document.getElementById("saveWorkoutBtn").addEventListener("click", saveWorkout);
+  // Форма
+  document
+    .getElementById("addExerciseBtn")
+    .addEventListener("click", addExercise);
+  document
+    .getElementById("saveWorkoutBtn")
+    .addEventListener("click", saveWorkout);
 }
 
 // Показать экран
@@ -44,10 +61,12 @@ function addExercise() {
   const exerciseBlock = exerciseClone.querySelector(".exercise-block");
   const setsContainer = exerciseBlock.querySelector(".sets-container");
 
+  // Добавляем 2 подхода
   for (let i = 1; i <= 2; i++) {
     addSetToContainer(setsContainer, i);
   }
 
+  // Добавляем кнопку для добавления подходов
   const addSetBtn = document.createElement("button");
   addSetBtn.className = "add-set-btn";
   addSetBtn.textContent = "+ Добавить подход";
@@ -57,8 +76,10 @@ function addExercise() {
     updateSetNumbers(setsContainer);
   });
 
+  // Добавляем кнопку под контейнером подходов
   exerciseBlock.appendChild(addSetBtn);
 
+  // Удаление упражнения (только если это не первое упражнение)
   const removeBtn = exerciseBlock.querySelector(".remove-exercise");
   removeBtn.addEventListener("click", function () {
     if (form.children.length > 1) {
@@ -66,6 +87,7 @@ function addExercise() {
     }
   });
 
+  // Убираем крестик у первого упражнения
   if (form.children.length === 0) {
     removeBtn.style.display = "none";
   }
@@ -81,6 +103,7 @@ function addSetToContainer(container, setNumber) {
 
   setRow.querySelector(".set-number").textContent = `Подход ${setNumber}`;
 
+  // Добавляем кнопку удаления подхода
   const removeSetBtn = document.createElement("button");
   removeSetBtn.className = "remove-set-btn";
   removeSetBtn.textContent = "×";
@@ -161,7 +184,8 @@ function showHistory() {
   const historyList = document.getElementById("historyList");
 
   if (workouts.length === 0) {
-    historyList.innerHTML = '<div class="empty-history">История тренировок пуста</div>';
+    historyList.innerHTML =
+      '<div class="empty-history">История тренировок пуста</div>';
   } else {
     let html = "";
 
@@ -173,7 +197,7 @@ function showHistory() {
             <div class="history-date">${workout.date}</div>
             <div class="history-exercises">${exerciseNames || "Без названия"}</div>
           </div>
-          <div style="display: flex; gap: 10px;">
+          <div class="history-actions">
             <button class="edit-workout-btn" onclick="editWorkout(${workout.id})" title="Редактировать">✎</button>
             <button class="delete-workout-btn" onclick="deleteWorkout(${workout.id})" title="Удалить тренировку">×</button>
           </div>
@@ -193,13 +217,22 @@ function showWorkoutDetails(id) {
   if (!workout) return;
 
   const workoutDetails = document.getElementById("workoutDetails");
-  let html = `<div class="workout-details-header"><div class="workout-date">${workout.date}</div></div>`;
+  let html = `<div class="workout-details-header">
+                <div class="workout-date">${workout.date}</div>
+              </div>`;
 
   workout.exercises.forEach((exercise) => {
-    html += `<div class="workout-exercise"><div class="workout-exercise-name">${exercise.name}</div><div class="workout-sets">`;
+    html += `<div class="workout-exercise">
+                <div class="workout-exercise-name">${exercise.name}</div>
+                <div class="workout-sets">`;
 
     exercise.sets.forEach((set) => {
-      html += `<div class="workout-set"><div class="set-info"><span class="set-number">Подход ${set.set}</span><span class="set-data">${set.weight} кг × ${set.reps} повт.</span></div></div>`;
+      html += `<div class="workout-set">
+                  <div class="set-info">
+                    <span class="set-number">Подход ${set.set}</span>
+                    <span class="set-data">${set.weight} кг × ${set.reps} повт.</span>
+                  </div>
+                </div>`;
     });
 
     html += `</div></div>`;
@@ -233,9 +266,12 @@ function editWorkout(id) {
       addSetToContainer(setsContainer, index + 1);
       const setRows = setsContainer.querySelectorAll('.set-row');
       const lastSet = setRows[setRows.length - 1];
-
-      lastSet.querySelector('.reps-input').value = set.reps;
-      lastSet.querySelector('.weight-input').value = set.weight;
+      
+      const repsInput = lastSet.querySelector('.reps-input');
+      const weightInput = lastSet.querySelector('.weight-input');
+      
+      repsInput.value = set.reps;
+      weightInput.value = set.weight;
     });
 
     const removeBtn = lastBlock.querySelector('.remove-exercise');
