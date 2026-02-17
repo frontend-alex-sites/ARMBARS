@@ -1,4 +1,4 @@
-** {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -355,6 +355,7 @@ h1 {
     justify-content: space-between;
     gap: 15px;
     transition: all 0.3s;
+    cursor: pointer;
 }
 
 .history-item:hover {
@@ -365,7 +366,6 @@ h1 {
 
 .history-item-content {
     flex: 1;
-    cursor: pointer;
 }
 
 .history-date {
@@ -382,6 +382,12 @@ h1 {
 }
 
 /* Кнопки в истории */
+.history-actions {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
 .edit-workout-btn {
     background: rgba(180, 180, 180, 0.1);
     color: #b3b3b3;
