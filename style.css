@@ -381,13 +381,7 @@ h1 {
     line-height: 1.4;
 }
 
-/* Кнопки в истории */
-.history-actions {
-    display: flex;
-    gap: 10px;
-    flex-shrink: 0;
-}
-
+/* Кнопка редактирования (карандаш) */
 .edit-workout-btn {
     background: rgba(180, 180, 180, 0.1);
     color: #b3b3b3;
