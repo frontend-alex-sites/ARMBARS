@@ -102,6 +102,8 @@ function addSetToContainer(container, setNumber) {
   const setRow = setClone.querySelector(".set-row");
 
   setRow.querySelector(".set-number").textContent = `Подход ${setNumber}`;
+  setRow.querySelector(".reps-input").placeholder = `повт.`;
+  setRow.querySelector(".weight-input").placeholder = `кг`;
 
   // Добавляем кнопку удаления подхода
   const removeSetBtn = document.createElement("button");
@@ -165,6 +167,7 @@ function saveWorkout() {
     return;
   }
 
+  // Сохраняем
   const workout = {
     id: Date.now(),
     date: new Date().toLocaleDateString("ru-RU"),
@@ -197,7 +200,7 @@ function showHistory() {
             <div class="history-date">${workout.date}</div>
             <div class="history-exercises">${exerciseNames || "Без названия"}</div>
           </div>
-          <div class="history-actions">
+          <div style="display: flex; gap: 10px;">
             <button class="edit-workout-btn" onclick="editWorkout(${workout.id})" title="Редактировать">✎</button>
             <button class="delete-workout-btn" onclick="deleteWorkout(${workout.id})" title="Удалить тренировку">×</button>
           </div>
@@ -242,7 +245,7 @@ function showWorkoutDetails(id) {
   showScreen("viewWorkout");
 }
 
-// Редактировать тренировку
+// === НОВАЯ ФУНКЦИЯ РЕДАКТИРОВАНИЯ ===
 function editWorkout(id) {
   const workout = workouts.find(w => w.id === id);
   if (!workout) return;
