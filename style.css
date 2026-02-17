@@ -90,7 +90,7 @@ h1 {
     transform: scale(1.02);
 }
 
-/* Шапка форм */
+/* Шапка форм в стиле Spotify */
 .workout-header {
     padding: 20px;
     display: flex;
@@ -140,6 +140,7 @@ h1 {
     padding: 20px;
     margin-bottom: 20px;
     transition: all 0.3s ease;
+    position: relative;
 }
 
 .exercise-block:hover {
@@ -151,6 +152,7 @@ h1 {
     align-items: center;
     gap: 15px;
     margin-bottom: 20px;
+    position: relative;
 }
 
 .exercise-name {
@@ -191,6 +193,41 @@ h1 {
     transform: scale(1.1);
 }
 
+/* Контейнер подсказок автокомплита */
+.suggestions-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #282828;
+    border: 1px solid #404040;
+    border-radius: 8px;
+    margin-top: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.suggestion-item {
+    padding: 12px 15px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-bottom: 1px solid #404040;
+    font-size: 15px;
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.suggestion-item:hover {
+    background: #1db954;
+    color: #fff;
+}
+
 /* Подходы */
 .sets-container {
     display: flex;
@@ -201,35 +238,50 @@ h1 {
 .set-row {
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 15px;
+    padding: 12px 15px;
     background: #282828;
     border: 1px solid #404040;
     border-radius: 10px;
     transition: all 0.3s;
+    position: relative;
 }
 
 .set-row:hover {
     background: #333;
 }
 
+/* Группа для номера подхода и полей ввода */
+.set-inputs-group {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
 .set-number {
-    min-width: 80px;
+    min-width: 70px;
     color: #b3b3b3;
     font-size: 14px;
     font-weight: 500;
+    margin-right: 15px;
 }
 
+/* Поля для ввода - одинакового размера */
 .reps-input, .weight-input {
-    flex: 1;
-    padding: 12px;
+    width: 70px;
+    padding: 10px;
     border: 2px solid #404040;
     border-radius: 8px;
     text-align: center;
-    font-size: 16px;
+    font-size: 15px;
     background: #181818;
     color: #fff;
     transition: all 0.3s;
+    flex: none;
+}
+
+/* Отступ между полями */
+.reps-input {
+    margin-right: 10px;
 }
 
 .reps-input:focus, .weight-input:focus {
@@ -243,18 +295,18 @@ h1 {
     background: rgba(29, 185, 84, 0.1);
     color: #1db954;
     border: 2px dashed #1db954;
-    padding: 14px;
+    padding: 12px;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 15px;
-    margin-top: 15px;
+    font-size: 14px;
+    margin-top: 12px;
     width: 100%;
     font-weight: 600;
     transition: all 0.3s;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
 }
 
 .add-set-btn:hover {
@@ -263,26 +315,31 @@ h1 {
     transform: scale(1.02);
 }
 
-/* Кнопка удаления подхода */
+/* Кнопка удаления подхода - по центру правой границы, наполовину снаружи */
 .remove-set-btn {
     background: rgba(226, 33, 52, 0.1);
     color: #e22134;
     border: none;
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s;
     flex-shrink: 0;
+    position: absolute;
+    right: -14px; /* Половина ширины выступает за блок */
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
 }
 
 .remove-set-btn:hover {
     background: rgba(226, 33, 52, 0.2);
-    transform: scale(1.1);
+    transform: translateY(-50%) scale(1.1);
 }
 
 /* Футер формы */
@@ -355,6 +412,7 @@ h1 {
     justify-content: space-between;
     gap: 15px;
     transition: all 0.3s;
+    cursor: pointer;
 }
 
 .history-item:hover {
@@ -365,7 +423,6 @@ h1 {
 
 .history-item-content {
     flex: 1;
-    cursor: pointer;
 }
 
 .history-date {
@@ -381,7 +438,7 @@ h1 {
     line-height: 1.4;
 }
 
-/* КНОПКА РЕДАКТИРОВАНИЯ (карандаш) */
+/* Кнопка редактирования тренировки (карандаш) */
 .edit-workout-btn {
     background: rgba(180, 180, 180, 0.1);
     color: #b3b3b3;
@@ -404,6 +461,7 @@ h1 {
     transform: scale(1.1);
 }
 
+/* Кнопка удаления тренировки */
 .delete-workout-btn {
     background: rgba(226, 33, 52, 0.1);
     color: #e22134;
