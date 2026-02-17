@@ -10,6 +10,7 @@ const screens = {
 
 // Инициализация
 function init() {
+  // Главный экран
   document
     .getElementById("startWorkoutBtn")
     .addEventListener("click", startNewWorkout);
@@ -17,6 +18,7 @@ function init() {
     .getElementById("viewHistoryBtn")
     .addEventListener("click", showHistory);
 
+  // Кнопки назад
   document
     .getElementById("backToMainBtn")
     .addEventListener("click", () => showScreen("main"));
@@ -27,12 +29,28 @@ function init() {
     .getElementById("backFromViewBtn")
     .addEventListener("click", () => showScreen("history"));
 
+  // Форма
   document
     .getElementById("addExerciseBtn")
     .addEventListener("click", addExercise);
   document
     .getElementById("saveWorkoutBtn")
     .addEventListener("click", saveWorkout);
+}
+
+// Получить все уникальные названия упражнений из истории
+function getExerciseSuggestions() {
+  const allExercises = new Set();
+  
+  workouts.forEach(workout => {
+    workout.exercises.forEach(exercise => {
+      if (exercise.name && exercise.name.trim() !== "") {
+        allExercises.add(exercise.name.trim());
+      }
+    });
+  });
+  
+  return Array.from(allExercises).sort();
 }
 
 // Показать экран
@@ -57,34 +75,100 @@ function addExercise() {
 
   const exerciseBlock = exerciseClone.querySelector(".exercise-block");
   const setsContainer = exerciseBlock.querySelector(".sets-container");
+  const exerciseNameInput = exerciseBlock.querySelector(".exercise-name");
 
+  // Добавляем 2 подхода
   for (let i = 1; i <= 2; i++) {
     addSetToContainer(setsContainer, i);
   }
 
+  // Добавляем автокомплит для названия упражнения
+  setupAutocomplete(exerciseNameInput);
+
+  // Добавляем кнопку для добавления подходов
   const addSetBtn = document.createElement("button");
   addSetBtn.className = "add-set-btn";
   addSetBtn.textContent = "+ Добавить подход";
-  addSetBtn.addEventListener("click", function () {
+  addSetBtn.addEventListener("click", function() {
     const currentSets = setsContainer.querySelectorAll(".set-row").length;
     addSetToContainer(setsContainer, currentSets + 1);
     updateSetNumbers(setsContainer);
   });
-
+  
+  // Добавляем кнопку под контейнером подходов
   exerciseBlock.appendChild(addSetBtn);
 
+  // Удаление упражнения (только если это не первое упражнение)
   const removeBtn = exerciseBlock.querySelector(".remove-exercise");
   removeBtn.addEventListener("click", function () {
     if (form.children.length > 1) {
       exerciseBlock.remove();
     }
   });
-
+  
+  // Убираем крестик у первого упражнения
   if (form.children.length === 0) {
     removeBtn.style.display = "none";
   }
 
   form.appendChild(exerciseBlock);
+}
+
+// Настроить автокомплит для поля ввода
+function setupAutocomplete(input) {
+  const suggestions = getExerciseSuggestions();
+  if (suggestions.length === 0) return;
+
+  // Создаем контейнер для подсказок
+  const suggestionsContainer = document.createElement("div");
+  suggestionsContainer.className = "suggestions-container";
+  input.parentNode.insertBefore(suggestionsContainer, input.nextSibling);
+
+  // Показываем подсказки при фокусе
+  input.addEventListener("focus", function() {
+    showSuggestions(this, suggestionsContainer, suggestions);
+  });
+
+  // Показываем подсказки при вводе
+  input.addEventListener("input", function() {
+    showSuggestions(this, suggestionsContainer, suggestions);
+  });
+
+  // Скрываем подсказки при клике вне поля
+  document.addEventListener("click", function(e) {
+    if (e.target !== input && !suggestionsContainer.contains(e.target)) {
+      suggestionsContainer.style.display = "none";
+    }
+  });
+}
+
+// Показать подсказки
+function showSuggestions(input, container, allSuggestions) {
+  const value = input.value.toLowerCase();
+  const suggestions = allSuggestions.filter(ex => 
+    ex.toLowerCase().includes(value)
+  );
+
+  container.innerHTML = "";
+  
+  if (suggestions.length === 0 || !value) {
+    container.style.display = "none";
+    return;
+  }
+
+  suggestions.forEach(suggestion => {
+    const div = document.createElement("div");
+    div.className = "suggestion-item";
+    div.textContent = suggestion;
+    div.addEventListener("click", function() {
+      input.value = suggestion;
+      container.style.display = "none";
+      input.focus();
+    });
+    container.appendChild(div);
+  });
+
+  container.style.display = "block";
 }
 
 // Добавить подход в контейнер
@@ -94,18 +178,37 @@ function addSetToContainer(container, setNumber) {
   const setRow = setClone.querySelector(".set-row");
 
   setRow.querySelector(".set-number").textContent = `Подход ${setNumber}`;
+  setRow.querySelector(".reps-input").placeholder = `повт.`;
+  setRow.querySelector(".weight-input").placeholder = `кг`;
 
+  // Создаем обертку для полей ввода
+  const inputsGroup = document.createElement("div");
+  inputsGroup.className = "set-inputs-group";
+  
+  // Перемещаем элементы в обертку
+  const setNumberEl = setRow.querySelector(".set-number");
+  const repsInput = setRow.querySelector(".reps-input");
+  const weightInput = setRow.querySelector(".weight-input");
+  
+  inputsGroup.appendChild(setNumberEl);
+  inputsGroup.appendChild(repsInput);
+  inputsGroup.appendChild(weightInput);
+  
+  // Вставляем обертку в начало строки
+  setRow.prepend(inputsGroup);
+
+  // Добавляем кнопку удаления подхода
   const removeSetBtn = document.createElement("button");
   removeSetBtn.className = "remove-set-btn";
   removeSetBtn.textContent = "×";
   removeSetBtn.title = "Удалить подход";
-  removeSetBtn.addEventListener("click", function () {
+  removeSetBtn.addEventListener("click", function() {
     if (container.querySelectorAll(".set-row").length > 1) {
       setRow.remove();
       updateSetNumbers(container);
     }
   });
-
+  
   setRow.appendChild(removeSetBtn);
   container.appendChild(setRow);
 }
@@ -114,7 +217,10 @@ function addSetToContainer(container, setNumber) {
 function updateSetNumbers(container) {
   const sets = container.querySelectorAll(".set-row");
   sets.forEach((set, index) => {
-    set.querySelector(".set-number").textContent = `Подход ${index + 1}`;
+    const setNumberEl = set.querySelector(".set-number");
+    if (setNumberEl) {
+      setNumberEl.textContent = `Подход ${index + 1}`;
+    }
   });
 }
 
@@ -156,6 +262,7 @@ function saveWorkout() {
     return;
   }
 
+  // Сохраняем
   const workout = {
     id: Date.now(),
     date: new Date().toLocaleDateString("ru-RU"),
