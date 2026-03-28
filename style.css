@@ -600,3 +600,7 @@ h1 {
     }
 }
 
+.app-logo {
+    width: 120px;
+    height: auto;
+}
