@@ -296,7 +296,7 @@ function showHistory() {
             <div class="history-exercises">${exerciseNames || "Без названия"}</div>
           </div>
           <div style="display: flex; gap: 10px;">
-            <button class="edit-workout-btn" onclick="editWorkout(${workout.id})" title="Редактировать">✎</button>
+            <button class="edit-workout-btn" onclick="editWorkout(${workout.id})" title="Повторить тренировку">↻</button>
             <button class="delete-workout-btn" onclick="deleteWorkout(${workout.id})" title="Удалить тренировку">×</button>
           </div>
         </div>
