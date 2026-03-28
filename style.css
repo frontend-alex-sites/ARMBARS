@@ -610,11 +610,12 @@ h1 {
 
 /* Стили для изображения логотипа */
 .app-logo {
-    width: 120px;
+    width: 50%;
+    max-width: 160px;
+    min-width: 80px;
     height: auto;
-    max-width: 80%;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
-    transition: transform 0.3s ease;
+    display: block;
+    margin: 0 auto;
 }
 
 .app-logo:hover {
