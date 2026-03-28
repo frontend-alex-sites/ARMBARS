@@ -599,41 +599,4 @@ h1 {
         transform: translateY(0);
     }
 }
-/* Контейнер для логотипа */
-.logo-container {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation: fadeIn 0.5s ease-out;
-}
 
-/* Стили для изображения логотипа */
-.app-logo {
-    width: 50%;
-    max-width: 160px;
-    min-width: 80px;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-}
-
-.app-logo:hover {
-    transform: scale(1.05);
-}
-
-/* Адаптивность для мобильных устройств */
-@media (max-width: 480px) {
-    .app-logo {
-        width: 100px;
-    }
-    
-    .logo-container {
-        margin-bottom: 15px;
-    }
-}
-.history-item,
-.exercise-block,
-.workout-exercise {
-    animation: fadeIn 0.3s ease-out;
-}
